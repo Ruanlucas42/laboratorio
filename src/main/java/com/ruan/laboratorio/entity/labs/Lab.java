@@ -1,4 +1,4 @@
-package entity;
+package com.ruan.laboratorio.entity.labs;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -13,14 +13,16 @@ public class Lab {
     private Integer id;
     private String nome;
     private String descricao;
+    private int capacidade;
 
     public Lab(){
     }
 
-    public Lab(int id, String nome, String descricao) {
+    public Lab(int id, String nome, String descricao, int capacidade) {
         this.id = id;
         this.nome = nome;
         this.descricao = descricao;
+        this.capacidade = capacidade;
     }
 
     public int getId() {
@@ -46,4 +48,13 @@ public class Lab {
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
+
+    public int getCapacidade() {
+        return capacidade;
+    }
+
+    public void setCapacidade(int capacidade) {
+        this.capacidade = capacidade;
+    }
 }
+

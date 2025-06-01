@@ -1,9 +1,10 @@
-package service;
+package com.ruan.laboratorio.service;
 
-import entity.Lab;
+
+import com.ruan.laboratorio.entity.labs.Lab;
+import com.ruan.laboratorio.repository.LabRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import repository.LabRepository;
 
 import java.util.List;
 

@@ -1,11 +1,13 @@
-package controller;
+package com.ruan.laboratorio.controller;
 
-import entity.Lab;
+
+import com.ruan.laboratorio.entity.labs.Lab;
+import com.ruan.laboratorio.service.LabService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import service.LabService;
+
 
 import java.util.List;
 

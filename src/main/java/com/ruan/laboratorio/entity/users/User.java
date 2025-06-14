@@ -1,10 +1,12 @@
 package com.ruan.laboratorio.entity.users;
 
+import com.ruan.laboratorio.entity.reserva.Reserva;
 import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -25,6 +27,8 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private UserRole role;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Reserva> reservas = new ArrayList<>();
 
     public User(){
     }
@@ -103,5 +107,13 @@ public class User implements UserDetails {
 
     public void setRole(UserRole role) {
         this.role = role;
+    }
+
+    public List<Reserva> getReservas() {
+        return reservas;
+    }
+
+    public void setReservas(List<Reserva> reservas) {
+        this.reservas = reservas;
     }
 }

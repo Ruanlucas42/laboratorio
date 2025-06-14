@@ -1,9 +1,10 @@
 package com.ruan.laboratorio.entity.labs;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.ruan.laboratorio.entity.reserva.Reserva;
+import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Lab {
@@ -14,6 +15,9 @@ public class Lab {
     private String nome;
     private String descricao;
     private int capacidade;
+
+    @OneToMany(mappedBy = "lab", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Reserva> reservas = new ArrayList<>();
 
     public Lab(){
     }
@@ -55,6 +59,14 @@ public class Lab {
 
     public void setCapacidade(int capacidade) {
         this.capacidade = capacidade;
+    }
+
+    public List<Reserva> getReservas() {
+        return reservas;
+    }
+
+    public void setReservas(List<Reserva> reservas) {
+        this.reservas = reservas;
     }
 }
 

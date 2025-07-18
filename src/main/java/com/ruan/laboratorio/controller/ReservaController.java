@@ -22,7 +22,6 @@ public class ReservaController {
         return new ResponseEntity<>(nova, HttpStatus.CREATED);
     }
 
-
     @GetMapping
     public ResponseEntity<List<Reserva>> getAllReserva(){
         List<Reserva> reservas = reservaService.buscaTodos();

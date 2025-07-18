@@ -18,13 +18,13 @@ public class LabController {
     @Autowired
     private LabService labService;
 
-    @PostMapping
+    @PostMapping("/criar")
     public ResponseEntity<Lab> saveLab(@RequestBody Lab lab){
         labService.saveLab(lab);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @GetMapping
+    @GetMapping("/buscar")
     public ResponseEntity <List<Lab>> getAllLab(){
         List<Lab> labs = labService.getLabs();
         return ResponseEntity.ok(labs);

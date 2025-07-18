@@ -30,18 +30,25 @@ public class SecurityConfigurations {
                         .requestMatchers("/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
                         .requestMatchers(HttpMethod.POST, "/auth/register").permitAll() //apenas para teste
-                        .requestMatchers(HttpMethod.POST, "/laboratorios").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/laboratorios/criar").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/laboratorio/buscar").hasAnyRole("ADMIN","USER")
+                        .requestMatchers(HttpMethod.PUT,"/laboratorio/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.GET,"/laboratorio/**").hasAnyRole("ADMIN","USER")
+                        .requestMatchers(HttpMethod.DELETE,"/laboratorio/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/reserva/criar").hasAnyRole("ADMIN","USER")
+                        .requestMatchers(HttpMethod.GET, "/reserva/buscar").hasAnyRole("ADMIN","USER")
+                        .requestMatchers(HttpMethod.PUT,"/reserva/**").hasAnyRole("ADMIN","USER")
+                        .requestMatchers(HttpMethod.GET,"/reserva/**").hasAnyRole("ADMIN","USER")
+                        .requestMatchers(HttpMethod.DELETE,"/reserva/**").hasAnyRole("ADMIN","USER")
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }
-
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     }
-
     @Bean
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();

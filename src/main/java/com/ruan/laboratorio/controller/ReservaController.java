@@ -16,13 +16,13 @@ public class ReservaController {
     @Autowired
     private ReservaService reservaService;
 
-    @PostMapping
+    @PostMapping("criar")
     public ResponseEntity<Reserva> criarReserva(@RequestBody Reserva reserva){
         Reserva nova = reservaService.saveReserva(reserva);
         return new ResponseEntity<>(nova, HttpStatus.CREATED);
     }
 
-    @GetMapping
+    @GetMapping("buscar")
     public ResponseEntity<List<Reserva>> getAllReserva(){
         List<Reserva> reservas = reservaService.buscaTodos();
         return ResponseEntity.ok(reservas);

@@ -1,6 +1,7 @@
 package com.ruan.laboratorio.controller;
 
 import com.ruan.laboratorio.entity.reserva.Reserva;
+import com.ruan.laboratorio.entity.reserva.ReservaDTO;
 import com.ruan.laboratorio.service.ReservaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,26 +18,26 @@ public class ReservaController {
     private ReservaService reservaService;
 
     @PostMapping("criar")
-    public ResponseEntity<Reserva> criarReserva(@RequestBody Reserva reserva){
-        Reserva nova = reservaService.saveReserva(reserva);
-        return new ResponseEntity<>(nova, HttpStatus.CREATED);
+    public ResponseEntity<ReservaDTO> criarReserva(@RequestBody ReservaDTO reservaDTO){
+        ReservaDTO novaReserva = reservaService.criarReserva(reservaDTO);
+        return  ResponseEntity.status(HttpStatus.CREATED).body(novaReserva);
     }
 
     @GetMapping("buscar")
-    public ResponseEntity<List<Reserva>> getAllReserva(){
-        List<Reserva> reservas = reservaService.buscaTodos();
+    public ResponseEntity<List<ReservaDTO>> getAllReserva(){
+        List<ReservaDTO> reservas = reservaService.buscarTodos();
         return ResponseEntity.ok(reservas);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Reserva> getById(@PathVariable Integer id){
-        Reserva reserva = reservaService.buscarPorId(id);
-        return  ResponseEntity.ok(reserva);
+    public ResponseEntity<ReservaDTO> getById(@PathVariable Integer id){
+        ReservaDTO reserva = reservaService.buscarPorId(id);
+        return ResponseEntity.ok(reserva);
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<Void> atualizaReserva(@RequestBody Reserva reserva, @PathVariable Integer id){
-        reservaService.atualizaReserva(reserva,id);
+    public ResponseEntity<Void> atualizaReserva(@RequestBody ReservaDTO reservaDTO, @PathVariable Integer id){
+        reservaService.atualizarReserva(reservaDTO,id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 

@@ -21,13 +21,20 @@ public class ReservaDTO {
 
     public static ReservaDTO fromEntity(Reserva reserva, DateTimeFormatter dateFormatter, DateTimeFormatter timeFormatter) {
         ReservaDTO dto = new ReservaDTO();
+
         dto.setId(reserva.getId());
-        dto.setData(reserva.getData().format(dateFormatter));
-        dto.setHoraInicio(reserva.getHoraInicio().format(timeFormatter));
-        dto.setHoraTermino(reserva.getHoraTermino().format(timeFormatter));
-        dto.setUserId(reserva.getUser().getId());
-        dto.setLabId(reserva.getLab().getId());
-        dto.setLabNome(reserva.getLab().getNome());
+        dto.setData(reserva.getData() != null ? reserva.getData().format(dateFormatter) : null);
+        dto.setHoraInicio(reserva.getHoraInicio() != null ? reserva.getHoraInicio().format(timeFormatter) : null);
+        dto.setHoraTermino(reserva.getHoraTermino() != null ? reserva.getHoraTermino().format(timeFormatter) : null);
+
+        if (reserva.getUser() != null) {
+            dto.setUserId(reserva.getUser().getId());
+        }
+
+        if (reserva.getLab() != null) {
+            dto.setLabId(reserva.getLab().getId());
+            dto.setLabNome(reserva.getLab().getNome());
+        }
         return dto;
     }
 
@@ -36,6 +43,7 @@ public class ReservaDTO {
                 .map(reserva -> fromEntity(reserva, dateFormatter, hourFormatter))
                 .collect(Collectors.toList());
     }
+
 
 
 
